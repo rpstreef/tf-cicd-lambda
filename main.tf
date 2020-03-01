@@ -23,7 +23,7 @@ resource "aws_s3_bucket" "artifact_store" {
 
   lifecycle_rule {
     enabled = true
-    
+
     expiration {
       days = 5
     }
@@ -88,7 +88,6 @@ resource "aws_codepipeline" "_" {
       provider         = "CodeBuild"
       version          = "1"
       input_artifacts  = ["source"]
-      output_artifacts = ["build"]
 
       configuration = {
         ProjectName = aws_codebuild_project._.name
