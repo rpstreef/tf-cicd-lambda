@@ -17,7 +17,7 @@ resource "random_string" "postfix" {
 # Resources: CodePipeline
 # -----------------------------------------------------------------------------
 resource "aws_s3_bucket" "artifact_store" {
-  bucket        = "$local.resource_name}-codepipeline-artifacts-${random_string.postfix.result}"
+  bucket        = "${local.resource_name}-codepipeline-artifacts-${random_string.postfix.result}"
   acl           = "private"
   force_destroy = true
 }
@@ -102,11 +102,6 @@ data "template_file" "buildspec" {
   template = file("${path.module}/codebuild/buildspec.yml")
 }
 
-resource "aws_s3_bucket" "cache" {
-  bucket = "${local.resource_name}-codebuild-cache-${random_string.postfix.result}"
-  acl    = "private"
-}
-
 module "iam_codebuild" {
   source = "github.com/rpstreef/tf-iam?ref=v1.0"
 
@@ -137,11 +132,6 @@ resource "aws_codebuild_project" "_" {
     packaging      = "ZIP"
   }
 
-  cache {
-    type     = "S3"
-    location = aws_s3_bucket.cache.bucket
-  }
-
   environment {
     compute_type    = var.build_compute_type
     image           = var.build_image
@@ -156,15 +146,6 @@ resource "aws_codebuild_project" "_" {
     environment_variable {
       name  = "LAMBDA_LAYER_NAME"
       value = var.lambda_layer_name
-    }
-
-    dynamic "environment_variable" {
-      for_each = var.environment_variables
-
-      content {
-        name  = environment_variable.value.name
-        value = environment_variable.value.value
-      }
     }
   }
 

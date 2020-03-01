@@ -17,22 +17,6 @@ variable "resource_tag_name" {
 # -----------------------------------------------------------------------------
 # Variables: CodeBuild
 # -----------------------------------------------------------------------------
-variable "environment_variables" {
-  type = list(object(
-    {
-      name  = string
-      value = string
-  }))
-
-  default = [
-    {
-      name  = "default"
-      value = ""
-  }]
-
-  description = "A list of maps, that contain both the key 'name' and the key 'value' to be used as additional environment variables for the build"
-}
-
 variable "build_image" {
   type        = string
   default     = "aws/codebuild/standard:2.0"
