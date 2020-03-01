@@ -129,7 +129,7 @@ resource "aws_codebuild_project" "_" {
   description   = "${local.resource_name}_codebuild_project"
   build_timeout = var.build_timeout
   badge_enabled = var.badge_enabled
-  service_role  = var.role_arn
+  service_role  = module.iam_codebuild.role_arn
 
   artifacts {
     type           = "CODEPIPELINE"
