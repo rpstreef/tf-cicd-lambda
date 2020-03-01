@@ -9,7 +9,7 @@ phases:
     install:
         run-as: root
         runtime-versions:
-          nodejs: 12
+          nodejs: 10
         commands:
             - pip3 install awscli --upgrade --user
             - npm install
