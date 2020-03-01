@@ -99,8 +99,7 @@ resource "aws_codepipeline" "_" {
 # -----------------------------------------------------------------------------
 
 data "template_file" "buildspec" {
-  template = var.buildspec_template
-  vars     = var.buildspec_vars
+  template = file("${path.module}/codebuild/buildspec.yml")
 }
 
 resource "aws_s3_bucket" "cache" {

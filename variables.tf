@@ -17,7 +17,6 @@ variable "resource_tag_name" {
 # -----------------------------------------------------------------------------
 # Variables: CodeBuild
 # -----------------------------------------------------------------------------
-
 variable "environment_variables" {
   type = list(object(
     {
@@ -71,16 +70,6 @@ variable "lambda_function_names" {
 variable "lambda_layer_name" {
   type        = string
   description = "Lambda Layer name to be code updated"
-}
-
-variable "buildspec_template" {
-  description = "Build specification YAML"
-}
-
-variable "buildspec_vars" {
-  type        = list(string)
-  default     = null
-  description = "Optional buildspec variables"
 }
 
 # -----------------------------------------------------------------------------
