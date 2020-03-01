@@ -23,7 +23,4 @@ phases:
            - echo " Completed Lambda & Lambda Layer updates ... "
            - echo Update completed on `date`
 artifacts:
-  files:
-    - '**/*'
   name: update-$(date +%Y-%m-%d)
-  discard-paths: no
