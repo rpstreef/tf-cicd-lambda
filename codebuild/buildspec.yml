@@ -1,5 +1,9 @@
 version: 0.2
 run-as: root
+env:
+  variables:
+    LAMBDA_FUNCTION_NAMES: $LAMBDA_FUNCTION_NAMES
+    LAMBDA_LAYER_NAME: $LAMBDA_LAYER_NAME
 
 phases:
     install:
@@ -11,7 +15,7 @@ phases:
     build:
         run-as: root
         commands:
-            - gulp update --functions ${LAMBDA_FUNCTION_NAMES} --lambdaLayer ${LAMBDA_LAYER_NAME}
+            - gulp update --functions "$LAMBDA_FUNCTION_NAMES" --lambdaLayer "$LAMBDA_LAYER_NAME"
     post_build:
         commands:
            - echo " Completed Lambda & Lambda Layer updates ... "
