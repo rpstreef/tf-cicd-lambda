@@ -11,6 +11,7 @@
           "logs:CreateLogStream",
           "logs:PutLogEvents",
           "lambda:GetLayerVersion",
+          "lambda:PublishLayerVersion",
           "lambda:PublishVersion",
           "lambda:UpdateAlias",
           "lambda:UpdateFunctionCode",
