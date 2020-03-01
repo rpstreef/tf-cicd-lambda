@@ -1,0 +1,23 @@
+version: 0.2
+run-as: root
+
+phases:
+    install:
+        run-as: root
+        runtime-versions:
+          node: 12
+        commands:
+            - pip3 install awscli --upgrade --user
+    build:
+        run-as: root
+        commands:
+            - ${gulp update --functions ${LAMBDA_FUNCTION_NAMES} --lambdaLayer ${LAMBDA_LAYER_NAME}}
+    post_build:
+        commands:
+           - echo " Completed Lambda & Lambda Layer updates ... "
+           - echo Update completed on `date`
+artifacts:
+  files:
+    - '**/*'
+  name: update-$(date +%Y-%m-%d)
+  discard-paths: no

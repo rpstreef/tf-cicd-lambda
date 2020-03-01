@@ -13,3 +13,102 @@ variable "region" {
 variable "resource_tag_name" {
   description = "Resource tag name for cost tracking"
 }
+
+# -----------------------------------------------------------------------------
+# Variables: CodeBuild
+# -----------------------------------------------------------------------------
+
+variable "environment_variables" {
+  type = list(object(
+    {
+      name  = string
+      value = string
+  }))
+
+  default = [
+    {
+      name  = "default"
+      value = ""
+  }]
+
+  description = "A list of maps, that contain both the key 'name' and the key 'value' to be used as additional environment variables for the build"
+}
+
+variable "build_image" {
+  type        = string
+  default     = "aws/codebuild/standard:2.0"
+  description = "Docker image for build environment, e.g. 'aws/codebuild/standard:2.0' or 'aws/codebuild/eb-nodejs-6.10.0-amazonlinux-64:4.0.0'. For more info: http://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref.html"
+}
+
+variable "build_compute_type" {
+  type        = string
+  default     = "BUILD_GENERAL1_SMALL"
+  description = "Instance type of the build instance"
+}
+
+variable "build_timeout" {
+  default     = 5
+  description = "How long in minutes, from 5 to 480 (8 hours), for AWS CodeBuild to wait until timing out any related build that does not get marked as completed"
+}
+
+variable "badge_enabled" {
+  type        = bool
+  default     = true
+  description = "Generates a publicly-accessible URL for the projects build badge. Available as badge_url attribute when enabled"
+}
+
+variable "privileged_mode" {
+  type        = bool
+  default     = false
+  description = "(Optional) If set to true, enables running the Docker daemon inside a Docker container on the CodeBuild instance. Used when building Docker images"
+}
+
+variable "lambda_function_names" {
+  type        = string
+  description = "All lambda function names (not ARN's!) to be code updated, a comma separated string"
+}
+
+variable "lambda_layer_name" {
+  type        = string
+  description = "Lambda Layer name to be code updated"
+}
+
+variable "buildspec_template" {
+  description = "Build specification YAML"
+}
+
+variable "buildspec_vars" {
+  type        = list(string)
+  default     = null
+  description = "Optional buildspec variables"
+}
+
+# -----------------------------------------------------------------------------
+# Variables: CodePipeline
+# -----------------------------------------------------------------------------
+variable "github_token" {
+  type        = string
+  description = "Github OAuth token"
+}
+
+variable "github_owner" {
+  type        = string
+  description = "Github username"
+}
+
+variable "github_repo" {
+  type        = string
+  description = "Github repository name"
+}
+
+variable "github_branch" {
+  type        = string
+  description = "Github branch name"
+  default     = "master"
+}
+
+variable "poll_source_changes" {
+  type        = string
+  default     = "false"
+  description = "Periodically check the location of your source content and run the pipeline if changes are detected"
+}
