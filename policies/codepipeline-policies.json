@@ -33,20 +33,6 @@
       "resources": [
         "${codebuild_project_arn}"
       ]
-    },
-    {
-      "Effect": "Allow",
-      "Action": [
-        "codedeploy:CreateDeployment",
-        "codedeploy:GetApplication",
-        "codedeploy:GetApplicationRevision",
-        "codedeploy:GetDeployment",
-        "codedeploy:GetDeploymentConfig",
-        "codedeploy:RegisterApplicationRevision"
-      ],
-      "resources": [
-        "*"
-      ]
     }
   ]
 }
