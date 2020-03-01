@@ -47,15 +47,6 @@
       "resources": [
         "*"
       ]
-    },
-    {
-      "Effect": "Allow",
-      "Action": [
-        "lambda:*"
-      ],
-      "resources": [
-        "*"
-      ]
     }
   ]
 }
