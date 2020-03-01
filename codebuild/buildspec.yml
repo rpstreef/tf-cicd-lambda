@@ -12,6 +12,7 @@ phases:
           nodejs: 10
         commands:
             - pip3 install awscli --upgrade --user
+            - npm install gulp-cli -g
             - npm install
     build:
         run-as: root
