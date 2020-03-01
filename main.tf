@@ -20,6 +20,14 @@ resource "aws_s3_bucket" "artifact_store" {
   bucket        = "${local.resource_name}-codepipeline-artifacts-${random_string.postfix.result}"
   acl           = "private"
   force_destroy = true
+
+  lifecycle_rule {
+    enabled = true
+    
+    expiration {
+      days = 5
+    }
+  }
 }
 
 module "iam_codepipeline" {
