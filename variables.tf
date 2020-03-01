@@ -36,7 +36,7 @@ variable "build_timeout" {
 
 variable "badge_enabled" {
   type        = bool
-  default     = true
+  default     = false
   description = "Generates a publicly-accessible URL for the projects build badge. Available as badge_url attribute when enabled"
 }
 

@@ -31,8 +31,8 @@ module "iam_codepipeline" {
 
   assume_role_policy = file("${path.module}/policies/codepipeline-assume-role.json")
   template           = file("${path.module}/policies/codepipeline-policies.json")
-  role_name          = "${local.resource_name}-codepipeline-role"
-  policy_name        = "${local.resource_name}-codepipeline-policy"
+  role_name          = "codepipeline-role"
+  policy_name        = "codepipeline-policy"
 
   role_vars = {
     codebuild_project_arn = aws_codebuild_project._.arn
@@ -111,8 +111,8 @@ module "iam_codebuild" {
 
   assume_role_policy = file("${path.module}/policies/codebuild-assume-role.json")
   template           = file("${path.module}/policies/codebuild-policy.json")
-  role_name          = "${local.resource_name}-codebuild-role"
-  policy_name        = "${local.resource_name}-codebuild-policy"
+  role_name          = "codebuild-role"
+  policy_name        = "codebuild-policy"
 
   role_vars = {
     s3_bucket_arn = aws_s3_bucket.artifact_store.arn
